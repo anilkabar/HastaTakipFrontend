@@ -1,0 +1,130 @@
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <h4 class="text-themecolor">Profile</h4>
+        </div>
+        <div class="col-md-7 align-self-center text-end">
+            <div class="d-flex justify-content-end align-items-center">
+                <ol class="breadcrumb justify-content-end">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                    <li class="breadcrumb-item active">Profile</li>
+                </ol>
+                <button type="button" class="btn btn-info d-none d-lg-block m-l-15 text-white"><i class="fa fa-plus-circle"></i> Create New</button>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+    <!-- Row -->
+    <div class="row">
+        <!-- Column -->
+        <div class="col-lg-4 col-xlg-3 col-md-5">
+            <div class="card">
+                <div class="card-body">
+                    <div class="text-center">
+                      <ng-container *ngIf="patient?.data?.imagePath!=null">
+                        <img width="280"  class="img-circle img-fluid"  [src]="patient?.data?.imagePath">
+                      </ng-container>
+                      <ng-container *ngIf="cinsiyet=='Erkek' && patient?.data?.imagePath==null">
+                        <img width="280"  class="img-circle img-fluid" src="assets/assets/images/users/erkek.png">
+                      </ng-container>
+                      <ng-container *ngIf="cinsiyet=='Kadın' && patient?.data?.imagePath==null">
+                        <img width="280"  class="img-circle img-fluid" src="assets/assets/images/users/kadin.png">
+                      </ng-container>
+
+
+                    </div>
+
+                </div>
+                <div>
+                    <hr> </div>
+
+
+                    <div class="card-body">
+                        <!-- .row -->
+                        <div class="row text-center m-t-10">
+                            <div class="col-md-6 border-right">
+                                <strong>Tc Kimlik</strong>
+                                <p>{{patient?.data?.identificationNumber}}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <strong>Cep Telefonu</strong>
+                                <p>{{patient?.data?.phone}}</p>
+                              {{patient?.data?.doctor?.company?.name}}
+                            </div>
+                        </div>
+                        <hr>
+                        <!-- /.row -->
+                        <!-- .row -->
+                        <div class="row text-center m-t-10">
+                            <div class="col-md-6 border-right">
+                                <strong>Adı ve Soyadı</strong>
+                                <p>{{patient?.data?.name}} {{patient?.data?.surname}}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <strong>E- Posta Adresi</strong>
+                                <p>{{patient?.data?.email}}</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row text-center m-t-10">
+                            <div class="col-md-6 border-right">
+                                <strong>Doğum Tarihi</strong>
+                                <p>{{patient?.data?.dateofBirth}}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <strong>Doktoru</strong>
+                                <p>{{patient?.data?.doctor?.name}}</p>
+                            </div>
+                        </div>
+                        <hr>
+                      <div class="row text-center m-t-10">
+                        <div class="col-md-12 border-right">
+                          <strong>Adresi</strong>
+                          <p>{{patient?.data?.adress}}</p>
+                        </div>
+                      </div>
+                    </div>
+            </div>
+        </div>
+        <!-- Column -->
+        <!-- Column -->
+        <div class="col-lg-8 col-xlg-9 col-md-7">
+            <div class="card">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs profile-tab" role="tablist">
+                    <li class="nav-item"> <a class="nav-link active" data-bs-toggle="tab" href="#HastaTumBilgiler" role="tab" aria-selected="false"><i class="fas fa-info fa-2x"></i> HastaTümBilgiler</a> </li>
+                    <li (click)="examinationClick(true)" class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#Examination" role="tab" aria-selected="false"><i class="fas fa-user-md fa-2x"></i> Muayene</a> </li>
+                    <li (click)="documentClick(true)" class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#Belgeler" role="tab" aria-selected="false"><i class="fa fa-paperclip fa-2x"></i> Belgeler</a> </li>
+                    <li (click)="noteClick(true)" class="nav-item"> <a class="nav-link" data-bs-toggle="tab"  href="#Not" role="tab" aria-selected="true">
+                        <i class="fas fa-books-medical a11y-sm fa-2x"></i>  Not</a> </li>
+                </ul>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div class="tab-pane active" id="HastaTumBilgiler" role="tabpanel">
+                        <div class="card-body">
+
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="Examination" role="tabpanel">
+
+                      <app-patientexamination *ngIf="examinationClickValue" [patientData]="patientData()"></app-patientexamination>
+                    </div>
+                    <!--second tab-->
+                    <div class="tab-pane" id="Belgeler" role="tabpanel">
+                      <app-patientdocument *ngIf="documentClickValue==true" [patientData]="patientData()" ></app-patientdocument>
+                    </div>
+
+                    <div class="tab-pane" id="Not" role="tabpanel">
+                      <app-patientnote *ngIf="noteClickValue==true" [patientData]="patientData()"></app-patientnote>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <!-- Column -->
+    </div>

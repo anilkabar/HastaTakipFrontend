@@ -1,0 +1,171 @@
+<div class="row page-titles">
+  <div class="col-md-5 align-self-center">
+    <h4 class="text-themecolor">Ayarlar</h4>
+  </div>
+  <div class="col-md-7 align-self-center text-end">
+    <div class="d-flex justify-content-end align-items-center">
+      <ol class="breadcrumb justify-content-end">
+        <li class="breadcrumb-item"><a href="javascript:void(0)">Anasayfa</a></li>
+        <li class="breadcrumb-item">Ayarlar</li>
+        <li class="breadcrumb-item active">Cihaz İşlemleri</li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-body bg-light">
+        <div class="row">
+          <div class="col-7">
+            <h3>Cihaz Marka </h3>
+            <h5 class="font-light m-t-0">Listesi</h5>
+          </div>
+          <div class="col-5">
+            <a data-bs-toggle="modal" data-bs-target="#addDeviceBrand" class="btn btn-danger d-lg-block m-l-15 text-white"><i class="fa fa-plus"></i> Cihaz Marka Ekle</a>
+
+          </div>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-hover table-sm">
+          <thead>
+          <tr>
+            <th>S.No</th>
+            <th>Adı</th>
+            <th>Eklenme Tarihi</th>
+            <th>İşlemler</th>
+
+          </tr>
+          </thead>
+          <tbody>
+
+          <tr *ngFor="let item of stockBrandModel?.data |orderBy:'date':true;let i=index">
+            <td>{{i+1}}</td>
+            <td class="txt-oflo">{{item.name}}</td>
+            <td class="txt-oflo">{{item.date |date:'dd.MM.YYYY - HH:mm'}}</td>
+            <td class="txt-oflo" [width]="210">
+              <div class="button-group">
+                <button type="button" data-toggle="tooltip" title="Sil" class="btn btn-danger btn-xs text-white"><i class="fa fa-trash-alt"></i> </button>
+              </div>
+            </td>
+          </tr>
+
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-body bg-light">
+        <div class="row">
+          <div class="col-7">
+            <h3>Cihaz Model </h3>
+            <h5 class="font-light m-t-0">Listesi</h5>
+          </div>
+          <div class="col-5">
+            <a data-bs-toggle="modal" data-bs-target="#addDeviceModel" class="btn btn-danger d-lg-block m-l-15 text-white"><i class="fa fa-plus"></i> Cihaz Model Ekle</a>
+
+          </div>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-hover table-sm">
+          <thead>
+          <tr>
+            <th>S.No</th>
+            <th>Adı</th>
+            <th>Ait Olduğu Marka</th>
+            <th>Eklenme Tarihi</th>
+            <th>İşlemler</th>
+
+          </tr>
+          </thead>
+          <tbody>
+
+          <tr *ngFor="let item of stockModel?.data |orderBy:'date':true;let i=index">
+            <td>{{i+1}}</td>
+            <td class="txt-oflo">{{item.name}}</td>
+            <td class="txt-oflo">{{item.stockBrandDto?.name}}</td>
+            <td class="txt-oflo">{{item.date |date:'dd.MM.YYYY - HH:mm'}}</td>
+            <td class="txt-oflo" [width]="210">
+              <div class="button-group">
+                <button (click)="stockModelDelete(item.id)" type="button" data-toggle="tooltip" title="Sil" class="btn btn-danger btn-xs text-white"><i class="fa fa-trash-alt"></i> </button>
+              </div>
+            </td>
+          </tr>
+
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<ng-container #addDeviceBrand>
+  <div id="addDeviceBrand" class="modal" tabindex="-1" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Cihaz Marka Ekleme Sayfası</h4>
+          <button #deviceBrandSave type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="stockBrandFormGroup">
+            <div class="form-group">
+              <label for="deviceBrandName" class="form-label">Adı:</label>
+              <input formControlName="name" type="text" class="form-control" id="deviceBrandName">
+            </div>
+
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button (click)="stockBrandSave(deviceBrandSave)" type="button" class="btn btn-danger waves-effect waves-light text-white"><i class="fa fa-save"></i> Kaydet</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container #addDeviceModel>
+  <div id="addDeviceModel" class="modal" tabindex="-1" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Cihaz Model Ekleme Sayfası</h4>
+          <button #close type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="stockModelFormGroup">
+            <div class="form-group">
+              <label for="devicemodelname" class="form-label">Adı:</label>
+              <input formControlName="name" type="text" class="form-control" id="devicemodelname">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Markası:</label>
+              <select formControlName="stockBrand" class="form-control form-select">
+                <option *ngFor="let item of stockBrandModel?.data" [value]="item.id">{{item.name}}</option>
+              </select>
+            </div>
+
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" (click)="stockModelSave(close)" class="btn btn-danger waves-effect waves-light text-white"><i class="fa fa-save"></i> Kaydet</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+
+
+
+
+

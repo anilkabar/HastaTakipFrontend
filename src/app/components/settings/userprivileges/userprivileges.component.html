@@ -1,0 +1,82 @@
+<div class="row page-titles">
+  <div class="col-md-5 align-self-center">
+    <h4 class="text-themecolor">Kullanıcı Yetki İşlemleri</h4>
+  </div>
+  <div class="col-md-7 align-self-center text-end">
+    <div class="d-flex justify-content-end align-items-center">
+      <ol class="breadcrumb justify-content-end">
+        <li class="breadcrumb-item"><a href="javascript:void(0)">Anasayfa</a></li>
+        <li class="breadcrumb-item">Ayarlar</li>
+        <li class="breadcrumb-item active">Kullanıcı Yetki</li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+ <!--<form [formGroup]="form" (ngSubmit)="userSelected()">-->
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <hr/>
+            <div class="table-responsive">
+              <table class="table mb-0 table-sm">
+                <thead>
+                <tr>
+                  <th>S.No</th>
+                  <th class="w-100">Yetki Sayfası</th>
+                  <th>Yetki Durumu</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let item of pageAdminModel?.data |orderBy:'desc';let i= index">
+                  <td>{{i+1}}</td>
+                  <td>{{item.controllerName}}</td>
+
+                  <td>
+
+                    <!--
+                    <p-inputSwitch  [ngModel]="userAuthority(item.id)" (onChange)="handleChange($event,item.id)">
+                  </p-inputSwitch>
+
+                               <p-checkbox formControlName="{{i}}"  [binary]="true" (ngModelChange)="save($event,item.id)" [ngModel]="true" value="{{item.id}}"></p-checkbox>
+                                <-<input [formControlName]="item" type="checkbox">
+-->
+
+
+
+                      <p-checkbox [binary]="true"  (onChange)="handleChange($event,item.id)" [ngModel]="userAuthority(item.id)"></p-checkbox>
+
+                  </td>
+                </tr>
+
+                </tbody>
+              </table>
+            </div>
+        </div>
+          <hr>
+          <div class="form-actions">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-offset-3 col-md-9">
+                    <button (click)="save()" type="submit" class="btn btn-success text-white"><i class="fas fa-save"></i> Kaydet</button>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+

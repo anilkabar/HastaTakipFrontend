@@ -1,0 +1,95 @@
+<div class="row page-titles">
+  <div class="col-md-5 align-self-center">
+    <h4 class="text-themecolor">Stok Ekleme İşlemleri</h4>
+  </div>
+  <div class="col-md-7 align-self-center text-end">
+    <div class="d-flex justify-content-end align-items-center">
+      <ol class="breadcrumb justify-content-end">
+        <li class="breadcrumb-item"><a href="Home">Anasayfa</a></li>
+        <li class="breadcrumb-item active">Stok Ekle</li>
+      </ol>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Stok Ekleme Sayfası</h4>
+        <hr/>
+        <form [formGroup]="stockFormGroup">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label for="serialnumber" class="col-3 col-form-label">Seri Numarası :</label>
+                <div class="col-6">
+                  <input formControlName="serialNumber" id="serialnumber" type="text" class="form-control form-control-success" placeholder="Seri Numarası">
+                </div>
+
+              </div>
+
+              <div class="form-group row">
+                <label class="col-3 col-form-label">Miktarı :</label>
+                <div class="col-6 d-flex justify-content-center">
+                  <select formControlName="stockAmount" class="form-control form-select">
+                    <ng-container>
+                      <option [value]="i+1" *ngFor="let item of stockCounter();let i =index">{{i+1}} Adet</option>
+                    </ng-container>
+                  </select>
+                </div>
+
+              </div>
+              <div class="form-group row">
+                <label for="price" class="col-3 col-form-label">Fiyatı:</label>
+                <div class="col-6">
+                  <input formControlName="price" id="price" type="text" class="form-control form-control-success" placeholder="Fiyatı">
+                </div>
+
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-3 col-form-label">Markası :</label>
+                <div class="col-6 d-flex justify-content-center">
+                  <select formControlName="stockBrand" (change)="stockModelFilitreleme()" class="form-control form-select" >
+                      <option *ngFor="let item of stockBrandModel?.data;let i=index" value="{{item.id}}">{{item.name}}</option>
+                  </select>
+                </div>
+              </div>
+
+
+              <div class="form-group row">
+                <label class="col-3 col-form-label">Modeli :</label>
+                <div class="col-6 d-flex justify-content-center">
+                  <select formControlName="stockModel"  class="form-control form-select">
+                    <ng-container>
+                      <option *ngFor="let item of stockModelFilitreleme()" value="{{item.id}}">{{item.name}}</option>
+                    </ng-container>
+                  </select>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </form>
+        <div class="form-actions">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-offset-3 col-md-9">
+                  <button (click)="stockAdd()" type="submit" class="btn btn-success text-white"><i class="fas fa-save"></i> Kaydet</button>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+

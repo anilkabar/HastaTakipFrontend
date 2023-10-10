@@ -1,0 +1,97 @@
+ <div class="card-body">
+    <form [formGroup]="formDocument" (ngSubmit)="patientDocumentSave()">
+      <div class="form-body">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <input formControlName="documentName" class="form-control" rows="5" placeholder="Belge Adı">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <input formControlName="documentPath" (change)="selectDocument($event)" class="form-control" id="formFileSm" type="file" accept="image/*,.pdf,doc,docx,xls,xlsx">
+            </div>
+          </div>
+          <div class="form-actions">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-offset-3 col-md-9">
+                    <button type="submit" class="btn btn-success text-white"><i class="fas fa-save"></i> Kaydet</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <hr>
+        </div>
+      </div>
+    </form>
+    <br>
+
+    <div class="table-responsive">
+      <table class="table table-sm">
+        <thead>
+        <tr>
+          <th>#Id</th>
+          <th>Belge Adı</th>
+          <th>Tarih</th>
+          <th>İşlemler</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of patientDocumentModel?.data;let i =index">
+
+          <td>{{i+1}}</td>
+          <td>{{item.name}}</td>
+          <td>{{item.date| date:'dd.MM.YYYY - HH:mm'}}</td>
+          <td>
+            <div class="button-group">
+              <button (click)="patientDocumentDelete(item.id)" type="button" data-toggle="tooltip" title="Sil" class="btn btn-danger btn-xs text-white"><i class="fa fa-trash-alt"></i> </button>
+              <a (click)="pdfView(item.id)" data-bs-toggle="modal" data-bs-target="#addDeviceBrand" data-toggle="tooltip" title="Görüntüle" class="btn btn-info btn-xs text-white"><i class="fas fa-eye"></i></a>
+            </div>
+
+          </td>
+        </tr>
+        </tbody>
+      </table>
+
+    </div>
+   <ng-container #addDeviceBrand>
+     <div id="addDeviceBrand" class="modal" tabindex="-1" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+       <div class="modal-dialog modal-xl">
+         <div class="modal-content">
+           <div class="modal-header">
+             <h4 class="modal-title">Belge</h4>
+             <button #deviceBrandSave type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+           </div>
+           <div class="modal-body">
+             <ng-container>
+               <ngx-extended-pdf-viewer
+                 [src]="documentPathURl?.path"
+                 [useBrowserLocale]="true"
+                 [textLayer]="false"
+                 [showHandToolButton]="true"
+                 [showPresentationModeButton]="false"
+                 [showDownloadButton]="true"
+                 [showOpenFileButton]="false"
+               ></ngx-extended-pdf-viewer>
+             </ng-container>
+             <img [src]="documentPathURl?.path">
+
+           </div>
+         </div>
+       </div>
+     </div>
+   </ng-container>
+
+
+  </div>
+
+
+
+
+
+
+

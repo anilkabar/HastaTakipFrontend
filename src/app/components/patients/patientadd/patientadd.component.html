@@ -1,0 +1,162 @@
+<div class="row page-titles">
+  <div class="col-md-5 align-self-center">
+    <h4 class="text-themecolor">Dashboard</h4>
+  </div>
+  <div class="col-md-7 align-self-center text-end">
+    <div class="d-flex justify-content-end align-items-center">
+      <ol class="breadcrumb justify-content-end">
+        <li class="breadcrumb-item"><a href="javascript:void(0)">Anasayfa</a></li>
+        <li class="breadcrumb-item active">Hasta Ekle</li>
+      </ol>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Hasta Kayıt Sayfası</h4>
+        <hr />
+        <form [formGroup]="formGroup" (ngSubmit)="patientAdd()" enctype="multipart/form-data">
+          <div class="form-body">
+
+            <div class="row">
+              <div class="col-md-6">
+                  <div class="form-group row">
+                    <label for="identificationNumber" class="col-3 col-form-label">Tc No :</label>
+                    <div class="col-6">
+                      <input formControlName="identificationNumber" id="identificationNumber" type="text" class="form-control form-control-success" placeholder="Tc Kimlik">
+                    </div>
+
+                  </div>
+                  <div class="form-group row">
+                    <label for="name" class="col-3 col-form-label">Adı :</label>
+                    <div id="name" class="col-6 d-flex justify-content-center">
+                      <input formControlName="name" name="name" class="form-control" placeholder="Hasta Adı">
+                    </div>
+
+                  </div>
+                  <div class="form-group row">
+                    <label for="surname" class="col-3 col-form-label">Soyadı :</label>
+                    <div class="col-6 d-flex justify-content-center">
+                      <input formControlName="surname" id="surname" class="form-control"  name="surname" placeholder="Hasta Soyadı">
+                    </div>
+
+                  </div>
+                  <div class="form-group row">
+                    <label for="phone" class="col-3 col-form-label">Telefon :</label>
+                    <div class="col-6 d-flex justify-content-center">
+                      <input formControlName="phone" maxlength="11" id="phone" class="form-control"  name="phone" placeholder="Telefon">
+                    </div>
+
+                  </div>
+                  <div class="form-group row">
+                    <label for="email" class="col-3 col-form-label">E-Posta :</label>
+                    <div class="col-6 d-flex justify-content-center">
+                      <input formControlName="email" id="email"  name="email"  class="form-control" placeholder="E-Posta">
+                    </div>
+
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-3 col-form-label">Doğum Tarihi :</label>
+                    <div class="col-6 d-flex justify-content-center">
+                      <input formControlName="dateofBirth" class="form-control"  name="dateofBirth" type="date" value="2000-08-19" id="example-date-input2">
+                    </div>
+
+                  </div>
+                 <div class="form-group row">
+                  <label for="phone" class="col-3 col-form-label">Cinsiyeti :</label>
+                  <div class="col-6 d-flex">
+                    <div class="form-check">
+                      <input formControlName="gender"  class="form-check-input" type="radio" name="gender" id="erkek" value="{{gender.erkek}}" ngModel="{{gender.erkek}}" [checked]="true" >
+                      <label class="form-check-label" for="erkek">
+                        Erkek
+                      </label>
+                    </div>
+                    <div class="form-check m-l-20">
+                      <input formControlName="gender" class="form-check-input" type="radio" name="gender" id="kadin" value="{{gender.kadin}}">
+                      <label class="form-check-label" for="kadin">
+                        Kadın
+                      </label>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-3 col-form-label">Doktoru :</label>
+                  <div class="col-6 d-flex justify-content-center">
+                    <select  formControlName="doctor" class="form-control form-select" ngModel="0">
+                      <ng-container>
+                        <option *ngFor="let item of doctorModel?.data" [value]="item.id" [selected]="true">{{item.name}}</option>
+                      </ng-container>
+                    </select>
+                  </div>
+
+                </div>
+
+
+              </div>
+
+              <div  class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-3 col-form-label">İli :</label>
+                  <div class="col-6 d-flex justify-content-center">
+                    <select formControlName="city" (change)="districtGetAll()" class="form-control form-select" ngModel="0" >
+                      <option [value]="0" [selected]="true">Seçiniz</option>
+                      <option  *ngFor="let item of cityModel?.data ;index as i" [value]="item.id" >{{item.name}}</option>
+                    </select>
+                  </div>
+                </div>
+
+                  <div *ngIf="districtModel?.data?.length &&formGroup.value.city>0" class="form-group row">
+                    <label class="col-3 col-form-label">İlçesi :</label>
+                    <div class="col-6 d-flex justify-content-center">
+                      <select formControlName="district"  class="form-control form-select" ngModel="0">
+                        <option [selected]="true" *ngFor="let item of districtModel?.data" [value]="item.id">{{item.name}}</option>
+                      </select>
+                    </div>
+
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-3 col-form-label">Açık Adres :</label>
+                    <div class="col-6 d-flex justify-content-center">
+                        <textarea formControlName="address"  name="address" class="form-control" rows="3" placeholder="Adres"></textarea>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-3 col-form-label">Fotoğraf :</label>
+                    <div class="col-6 d-flex justify-content-center">
+                      <input (change)="selectimagePath($event)" formControlName="imagePath" name="imagePath" class="form-control" type="file">
+                    </div>
+                  </div>
+              </div>
+            </div>
+              <div class="form-actions">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-md-offset-3 col-md-9">
+                        <button type="submit" class="btn btn-success text-white"><i class="fas fa-save"></i> Kaydet</button>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <hr>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+

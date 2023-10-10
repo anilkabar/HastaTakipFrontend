@@ -1,0 +1,62 @@
+
+<aside class="left-sidebar">
+  <!-- Sidebar scroll-->
+  <div class="scroll-sidebar ps ps--theme_default ps--active-y" data-ps-id="dfc531a3-abfc-3005-f5ac-e66c82fe9f05">
+      <!-- Sidebar navigation-->
+      <nav class="sidebar-nav active">
+          <ul id="sidebarnav" class="in">
+
+              <li class="nav-small-cap">--- Menuler</li>
+              <li> <a class="waves-effect waves-dark" routerLink=""><i class="far fa-home"></i><span class="hide-menu">Anasayfa</span></a>
+              </li>
+              <li *ngIf="ustMenu(autGuard.patientAdd,autGuard.patientList)"> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="far fa-hospital-user"></i><span class="hide-menu">Hastalar</span></a>
+                <ul aria-expanded="false" class="collapse">
+
+                    <li *ngIf="menuPermission(autGuard.patientAdd_permission[0])"><a routerLinkActive="../Patients/PatientAdd" routerLink="../Patients/PatientAdd">Hasta Ekle</a></li>
+                    <li *ngIf="menuPermission(autGuard.patientList_permission[0])"><a routerLink="Patients">Tüm Hastalar</a></li>
+
+
+                </ul>
+            </li>
+            <li *ngIf="menuPermission(autGuard.meeting_permission[0])"> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="far fa-calendar"></i><span class="hide-menu">Randevu İşlemleri</span></a>
+              <ul aria-expanded="false" class="collapse">
+                <li *ngIf="menuPermission(autGuard.meeting_permission[0])"><a routerLink="../Meeting"  >Randevu Ekle</a></li>
+
+              </ul>
+            </li>
+            <li *ngIf="ustMenu(autGuard.stockAdd,autGuard.stockList)"> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="far fa-box"></i><span class="hide-menu">Stok İşlemleri</span></a>
+              <ul aria-expanded="false" class="collapse">
+                <li *ngIf="menuPermission(autGuard.stockAdd_permission[0])" ><a routerLink="../Stock/StockAdd">Stok Ekle</a></li>
+                <li *ngIf="menuPermission(autGuard.stockList_permission[0] )"><a routerLink="../Stock/StockList">Stok Listele</a></li>
+
+              </ul>
+            </li>
+            <li *ngIf="ustMenu(autGuard.patientReport,autGuard.profitReport)"> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="far fa-file-chart-line"></i><span class="hide-menu">Raporlar</span></a>
+              <ul aria-expanded="false" class="collapse">
+                <li *ngIf="menuPermission(autGuard.patientReport_permission[0])"><a routerLink="Randevu/Randevu Ekle">Hasta Raporu</a></li>
+                <li *ngIf="menuPermission(autGuard.profitReport_permission[0])"><a href="Randevu/Randevu Listele">Kar Zarar Raporu</a></li>
+              </ul>
+            </li>
+
+
+            <li *ngIf="ustMenu(autGuard.userOperations,autGuard.deviceOperations,autGuard.doctorOperations)"> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="far fa-cogs"></i><span class="hide-menu">Ayarlar</span></a>
+              <ul aria-expanded="false" class="collapse">
+                  <li *ngIf="menuPermission(autGuard.userOperations_permission[0])"><a routerLink="/Settings/UserOperations">Kullanıcı İşlemleri</a></li>
+                  <li *ngIf="menuPermission(autGuard.doctorOperations_permission[0])"><a href="app-calendar.html">Doktor İşlemleri</a></li>
+                  <li *ngIf="menuPermission(autGuard.deviceOperations_permission[0])"><a routerLink="Settings/DeviceOperations">Cihaz İşlemleri</a></li>
+              </ul>
+          </li>
+          </ul>
+      </nav>
+      <!-- End Sidebar navigation -->
+  <div class="ps__scrollbar-x-rail" style="left: 0px; bottom: 0px;">
+    <div class="ps__scrollbar-x" tabindex="0" style="left: 0px; width: 0px;">
+    </div>
+</div>
+<div class="ps__scrollbar-y-rail" style="top: 0px; height: 560px; right: 0px;">
+    <div class="ps__scrollbar-y" tabindex="0" style="top: 0px; height: 214px;">
+    </div>
+</div>
+</div>
+  <!-- End Sidebar scroll-->
+</aside>

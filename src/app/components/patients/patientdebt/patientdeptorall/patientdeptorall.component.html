@@ -1,0 +1,72 @@
+<div class="row page-titles">
+  <div class="col-md-5 align-self-center">
+    <h4 class="text-themecolor">Borçlu Hastalar</h4>
+  </div>
+  <div class="col-md-7 align-self-center text-end">
+    <div class="d-flex justify-content-end align-items-center">
+      <ol class="breadcrumb justify-content-end">
+        <li class="breadcrumb-item"><a href="javascript:void(0)">Anasayfa</a></li>
+        <li class="breadcrumb-item">Hastalar</li>
+        <li class="breadcrumb-item active">Borçlu Hastalar</li>
+      </ol>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+
+
+          <div class="table-responsive">
+            <table class="table color-table info-table table-hover table-sm">
+              <thead>
+              <tr>
+                <th>S.No</th>
+                <th>Tc Kimlik</th>
+                <th>Adı Soyadı</th>
+                <th>Telefon Numarası</th>
+                <th>Borç Miktarı</th>
+                <th>İşlemler</th>
+              </tr>
+              </thead>
+              <tbody>
+
+              <ng-container *ngFor="let item of stockSaleModelData;">
+                <ng-container *ngIf="stocPaymentControl(item)">
+                <tr>
+                  <td>{{say}}</td>
+                  <td>{{item.patientDto?.identificationNumber}}</td>
+                  <td>{{item.patientDto?.name}}{{item.patientDto?.surname}}</td>
+                  <td>{{item.patientDto?.phone}}</td>
+                  <td>{{borcKontrol(item) |currency:'TRY'}}</td>
+                  <td class="txt-oflo" [width]="210">
+                    <div class="button-group">
+
+                      <a href="/Patient/PatientDebt/{{item.patientDto?.id}}"><button type="button" data-toggle="tooltip" title="Borç Bilgisi" class="btn btn-github btn-xs text-white"><i class="fa fa-lira-sign"></i> </button></a>
+
+                    </div>
+                  </td>
+                </tr>
+                </ng-container>
+              </ng-container>
+
+
+
+              </tbody>
+            </table>
+
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+

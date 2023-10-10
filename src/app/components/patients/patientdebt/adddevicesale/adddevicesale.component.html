@@ -1,0 +1,70 @@
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Cihaz Satışı Ekle</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+
+    <form [formGroup]="formGroup">
+      <div class="form-group row">
+        <label for="date" class="col-3 col-form-label">Tarih :</label>
+        <div class="col-9 d-flex justify-content-center">
+          <input type="date" formControlName="date"  class="form-control"   placeholder="Hasta Adı">
+        </div>
+      </div>
+
+
+
+      <div class="form-group row">
+        <label class="col-3 col-form-label">Cihaz :</label>
+
+        <div class="col-9 d-flex justify-content-center">
+
+          <select (change)="amount()" formControlName="stockModel" class="form-control form-select">
+            <option [value]="item.id"  *ngFor="let item of stockModel?.data" > {{item.serialNumber}} - {{item.stockModelDto.stockBrandDto?.name}} - {{item.stockModelDto.name}}</option>
+          </select>
+
+
+        </div>
+        <ng-container *ngIf="stockData!">
+          <div class="row">
+            <div class="col-md-3 m-r-5">
+
+            </div>
+            <div class="col-md-6">
+              <small class="text-danger">Stok Miktarı: {{stockData?.stockAmount}}</small>
+              <small class="text-danger m-l-25">Alış Fiyatı: {{stockData?.price}} <i class="fa fa-lira-sign"></i></small>
+            </div>
+          </div>
+        </ng-container>
+
+
+      </div>
+
+      <div class="form-group row">
+        <label for="explanation" class="col-3 col-form-label">Tutar :</label>
+        <div class="col-9 d-flex justify-content-center">
+          <input type="number" formControlName="salePrice" id="date" class="form-control" placeholder="Tutar">
+        </div>
+      </div>
+
+
+      <div class="form-group row">
+        <label for="explanation" class="col-3 col-form-label">Açıklama :</label>
+        <div class="col-9 d-flex justify-content-center">
+          <textarea rows="5" formControlName="explanation" id="explanation" class="form-control" placeholder="Açıklama"></textarea>
+        </div>
+      </div>
+
+
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button (click)="addDeviceSale()" type="button" class="btn btn-danger waves-effect waves-light text-white"><i class="fa fa-save"></i> Kaydet</button>
+  </div>
+</ng-template>
+<button type="button" class="btn waves-effect waves-light btn-danger m-l-10 text-white" (click)="modalOpen(content)"> <i class="fa fa-head-side-headphones"></i> Cihaz Satışı Ekle</button>
+
+
+
+

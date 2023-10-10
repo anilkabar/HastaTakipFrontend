@@ -1,0 +1,88 @@
+
+<ng-container>
+
+<hr class="m-t-0"/>
+  <div class="modal-body m-t-0">
+    <form [formGroup]="formGroup">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="small">Adı</label>
+            <div class="input-group mb-3">
+              <input formControlName="name" type="text" class="form-control" placeholder="Adı">
+            </div>
+          </div>
+
+
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="small">Soyadı</label>
+            <div class="input-group mb-3">
+              <input formControlName="surname" type="text" class="form-control" placeholder="Soyadı">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="small">Doktor</label>
+            <div class="input-group mb-3">
+              <select (change)="doctorSelected()" formControlName="doctor" class="form-control form-select">
+                <option [value]="item.id" *ngFor="let item of doctor?.data">{{item.name}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="small">Randevu Tarihi</label>
+                <div class="input-group md-4">
+                  <input formControlName="meetingDate"  type="text" class="form-control small"  placeholder="{{meetingDate}}">
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="small">Saat</label>
+                <div class="input-group mb-3">
+                  <select formControlName="meetingHour" class="form-control form-select">
+                    <option class="small" *ngFor="let item of meetingHour">{{item}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="small">Dakika</label>
+                <div class="input-group mb-3">
+                  <select formControlName="meetingMinute" class="form-control form-select">
+                    <option class="small" *ngFor="let item of meetingMinute" >{{item}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="form-group">
+            <label class="small">Randevu Tarihi</label>
+            <div class="input-group md-4">
+              <textarea formControlName="information" class="form-control small" rows="5" placeholder="Açıklama"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button (click)="save()" type="button" class="btn btn-danger waves-effect waves-light text-white"><i class="fa fa-save"></i> Kaydet</button>
+  </div>
+</ng-container>

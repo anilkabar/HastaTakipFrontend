@@ -1,0 +1,145 @@
+<div class="row page-titles">
+  <div class="col-md-5 align-self-center">
+    <h4 class="text-themecolor">Cihaz Satış</h4>
+  </div>
+  <div class="col-md-7 align-self-center text-end">
+    <div class="d-flex justify-content-end align-items-center">
+      <ol class="breadcrumb justify-content-end">
+        <li class="breadcrumb-item"><a href="javascript:void(0)">Anasayfa</a></li>
+        <li class="breadcrumb-item">Hastalar</li>
+        <li class="breadcrumb-item active">Tüm Hastalar</li>
+      </ol>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-8">
+            <div class="col-md-8">
+
+              <input type="date" [(ngModel)]="firstDate" id="firstDate" class="form-control form-control w-25" >
+              <input type="date" [(ngModel)]="lastDate" id="lastDate" class="form-control form-control w-25 m-l-5" >
+              <button *ngIf="filterResult" (click)="filterClean()" type="button" class="btn waves-effect waves-light btn-danger text-white m-l-10"><i class="fa fa-filter"></i></button>
+              <button (click)="filter()" type="button" class="btn waves-effect waves-light btn-github text-white m-l-10"><i class="fa fa-search"></i></button>
+
+
+            </div>
+          </div>
+          <div class="col-md-4 p-r-0">
+            <div class="row">
+              <div class="col-lg-12 text-end">
+
+                <app-paymentadd [remainder]="remainder()" [patientData]="patient?.data"></app-paymentadd>
+                <app-adddevicesale [patientData]="patient?.data"></app-adddevicesale>
+
+              </div>
+            </div>
+          </div>
+          <hr class="mt-1" />
+          <div class="row">
+            <div class="col-md-5">
+
+            </div>
+            <div class="col-md-7 text-end">
+
+              <!--
+              <span class="label label-info">Alacak: 1200 <i class="fa fa-lira-sign"></i></span>
+              <span class="label label-custom m-l-10">Tahsil Edilen: 1200 <i class="fa fa-lira-sign"></i></span>
+              <span class="label label-purple m-l-10">Satış: 1200 <i class="fa fa-lira-sign"></i></span>
+              -->
+              <h4>
+                <span class="label label-rounded label-info">Alacak: {{remainder() |number}} <i class="fa fa-lira-sign"></i> </span>
+                <span class="label label-rounded label-inverse m-l-5">Tahsil Edilen: {{paymentAmount |number}} <i class="fa fa-lira-sign"></i> </span>
+                <span class="label label-rounded label-purple m-l-5">Satış:{{total | number}} <i class="fa fa-lira-sign"></i> </span>
+              </h4>
+
+            </div>
+
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="table-responsive">
+            <table class="table color-table info-table table-hover table-sm">
+              <thead>
+              <tr>
+                <th>S.No</th>
+                <th>Cihaz</th>
+                <th>Açıklama</th>
+                <th>İşlem Türü</th>
+                <th>Tutar</th>
+                <th>Tarih</th>
+                <th>İşlemler</th>
+              </tr>
+              </thead>
+              <tbody>
+
+              <ng-container >
+                <tr *ngFor="let item of filterStockPaymentModel |orderBy:'id':true; let i= index">
+                  <td>{{i+1}}</td>
+                  <td>-</td>
+                  <td>{{item.information}}</td>
+
+                  <td>Ödeme -
+                    <ng-container *ngIf="item.paymentType==paymentType.nakit">
+                      Nakit
+                    </ng-container>
+                    <ng-container *ngIf="item.paymentType==paymentType.havale">
+                      Havale
+                    </ng-container>
+                    <ng-container *ngIf="item.paymentType==paymentType.kart">
+                      Kredi Kartı
+                    </ng-container>
+                  </td>
+                  <td>{{item.paymentAmount |currency:'TRY'}}</td>
+                  <td>{{item.date |date:'dd.MM.YYYY'}}</td>
+                  <td class="txt-oflo" [width]="210">
+                    <div class="button-group">
+
+                      <button (click)="deletePayment(item.id)" type="button" data-toggle="tooltip" title="Sil" class="btn btn-danger btn-xs text-white"><i class="fa fa-trash-alt"></i> </button>
+                    </div>
+                  </td>
+                </tr>
+              </ng-container>
+
+              <ng-container >
+                <tr *ngFor="let item of stockSaleModel?.data |orderBy:'id':true; let i= index">
+                  <td>{{i+1}}</td>
+                  <td>{{item.stockDto?.serialNumber}} -{{item.stockDto?.stockModelDto?.stockBrandDto?.name}} - {{item.stockDto?.stockModelDto?.name}} </td>
+                  <td>{{item.information}}</td>
+                  <td>Satış</td>
+                  <td>{{item.salePrice |currency:'TRY'}}</td>
+                  <td>{{item.date |date:'dd.MM.YYYY'}}</td>
+                  <td class="txt-oflo" [width]="210">
+                    <div class="button-group">
+
+                      <button (click)="deleteById(item.id)" type="button" data-toggle="tooltip" title="Sil" class="btn btn-danger btn-xs text-white"><i class="fa fa-trash-alt"></i> </button>
+                    </div>
+                  </td>
+                </tr>
+              </ng-container>
+
+
+
+              </tbody>
+            </table>
+
+            <ng-container *ngIf="patient?.data==null">
+              <div  class="row justify-content-center align-items-center">
+                <span class="alert alert-danger h-25 w-25 text-center">Hasta Bulunamadı....!!</span>
+              </div>
+            </ng-container>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+

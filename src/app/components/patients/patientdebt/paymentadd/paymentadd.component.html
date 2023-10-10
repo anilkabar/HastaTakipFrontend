@@ -1,0 +1,63 @@
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Ödeme Ekle</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+
+    <form [formGroup]="formGroup">
+      <div class="form-group row">
+        <label for="date" class="col-3 col-form-label">Tarih :</label>
+        <div class="col-9 d-flex justify-content-center">
+          <input type="date" formControlName="date" id="date" class="form-control"   placeholder="Hasta Adı">
+        </div>
+      </div>
+
+
+
+      <div class="form-group row">
+        <label for="{{paymentType.nakit}}" class="col-3 col-form-label"> Ödeme Türü :</label>
+        <div class="col-9 d-flex">
+          <input formControlName="paymentType" class="form-check-input" type="radio" name="paymentType" id="{{paymentType.nakit}}" value="{{paymentType.nakit}}">
+          <label class="form-check-label" for="{{paymentType.nakit}}">
+            Nakit
+          </label>
+
+          <input formControlName="paymentType" class="form-check-input m-l-10" type="radio" name="paymentType" id="{{paymentType.kart}}" value="{{paymentType.kart}}">
+          <label class="form-check-label" for="{{paymentType.kart}}">
+            Kredi Kartı
+          </label>
+
+          <input formControlName="paymentType" class="form-check-input m-l-10" type="radio" name="paymentType" id="{{paymentType.havale}}" value="{{paymentType.havale}}">
+          <label class="form-check-label" for="{{paymentType.havale}}">
+            Havale
+          </label>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="amount" class="col-3 col-form-label">Tutar :</label>
+        <div class="col-9 d-flex justify-content-center">
+          <input type="number" formControlName="paymentAmount" id="amount" class="form-control"  placeholder="Tutar">
+        </div>
+      </div>
+
+
+      <div class="form-group row">
+        <label for="explanation" class="col-3 col-form-label">Açıklama :</label>
+        <div class="col-9 d-flex justify-content-center">
+          <textarea rows="5" formControlName="information" id="explanation" class="form-control" placeholder="Açıklama"></textarea>
+        </div>
+      </div>
+
+
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button (click)="save()" type="button" class="btn btn-danger waves-effect waves-light text-white"><i class="fa fa-save"></i> Kaydet</button>
+  </div>
+</ng-template>
+
+<button  type="button" class="btn waves-effect waves-light btn-success text-white" (click)="modalOpen(content)"><i class="fa fa-lira-sign"></i> Ödeme Ekle</button>
+
+
+

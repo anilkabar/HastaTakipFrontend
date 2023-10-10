@@ -1,0 +1,66 @@
+
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <h4 class="text-themecolor">Anasayfa</h4>
+        </div>
+        <div class="col-md-7 align-self-center text-end">
+
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Info box -->
+    <!-- ============================================================== -->
+    <!-- Row -->
+    <div class="row">
+        <!-- Column -->
+        <div (click)="patientDeptrolAll()" class="col-lg-6 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex no-block">
+                        <div class="round align-self-center round-success"><i class="ti-wallet"></i></div>
+                        <div class="m-l-10 align-self-center">
+                            <h3 class="m-b-0">{{patientInDebtCount()}}</h3>
+                            <h5 class="text-muted m-b-0">Borçlu Hasta</h5></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Column -->
+        <!-- Column -->
+        <div class="col-lg-6 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex no-block">
+                        <div class="round align-self-center round-info"><i class="ti-user"></i></div>
+                        <div class="m-l-10 align-self-center">
+                            <h3 class="m-b-0">{{patientData?.data?.length}}</h3>
+                            <h5 class="text-muted m-b-0">Hasta Sayısı</h5></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Aylara Göre Hasta Sayısı</h5>
+                    <div>
+                        <canvas id="chart1" height="245" width="490" style="width: 490px; height: 245px;"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+

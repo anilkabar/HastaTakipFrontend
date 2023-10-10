@@ -1,0 +1,70 @@
+<div class="tab-pane" id="Examination" role="tabpanel">
+  <div class="card-body">
+    <form [formGroup]="formExamination" (ngSubmit)="save()">
+      <div class="form-body">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <textarea formControlName="patientComplaint" class="form-control" rows="3" placeholder="Hasta Şikayeti"></textarea>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <textarea formControlName="doctorDiagnosis" class="form-control" rows="3" placeholder="Doctor Teşhisi"></textarea>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group m-t-0">
+              <textarea formControlName="treatmentAdministered" class="form-control" rows="3" placeholder="Uygulanan Tedavi"></textarea>
+            </div>
+          </div>
+          <div class="form-actions">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-offset-3 col-md-9">
+                    <button type="submit" class="btn btn-success text-white"><i class="fas fa-save"></i> Kaydet</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <hr>
+        </div>
+      </div>
+    </form>
+    <br>
+
+    <div class="table-responsive">
+      <table class="table table-sm">
+        <thead>
+        <tr>
+          <th>#Sıra No</th>
+          <th>Hasta Şikayeti</th>
+          <th>Doktor Teşhisi</th>
+          <th>Yapılan İşlem</th>
+          <th>Tarih</th>
+          <th>İşlemler</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of patientExaminationModel?.data |orderBy:'date':true;let i =index">
+          <td>{{i+1}}</td>
+          <td>{{item.patientComplaint}}</td>
+          <td>{{item.doctorDiagnosis}}</td>
+          <td>{{item.treatmentAdministered}}</td>
+          <td>{{item.date |date:'dd.MM.YYYY - hh:mm'}}</td>
+          <td>
+            <div class="button-group">
+              <button (click)="deleteById(item.id)" type="button" data-toggle="tooltip" title="Sil" class="btn btn-danger btn-xs text-white"><i class="fa fa-trash-alt"></i> </button>
+            </div>
+
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+

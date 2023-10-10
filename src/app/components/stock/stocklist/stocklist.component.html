@@ -1,0 +1,94 @@
+<div class="row page-titles">
+  <div class="col-md-5 align-self-center">
+    <h4 class="text-themecolor">Dashboard</h4>
+  </div>
+  <div class="col-md-7 align-self-center text-end">
+    <div class="d-flex justify-content-end align-items-center">
+      <ol class="breadcrumb justify-content-end">
+        <li class="breadcrumb-item"><a href="javascript:void(0)">Anasayfa</a></li>
+        <li class="breadcrumb-item">Hastalar</li>
+        <li class="breadcrumb-item active">Tüm Hastalar</li>
+      </ol>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6 padding-right">
+            <div class="form-group">
+              <input
+                [(ngModel)]="filterText"
+                (ngModelChange)="stockFilter()" (change)="pageNumber"  type="text" id="firstName" class="form-control form-control-sm w-25" placeholder="Arama...">
+            </div>
+          </div>
+          <div class="col-md-6 text-end">
+            <div class="btn-group">
+              <button type="button" class="btn btn-primary dropdown-toggle text-white btn-sm" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dışarı Aktar
+                <i class="fa fa-download"></i>
+              </button>
+              <div class="dropdown-menu animated flipInY">
+                <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-file-pdf fa-1x "></i>   Pdf</a>
+                <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-file-excel fa-1x "></i>   Excell</a>
+              </div>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="table color-table info-table table-sm">
+              <thead>
+              <tr>
+                <th>S.No</th>
+                <th>Seri Numarası</th>
+                <th>Stok Markası</th>
+                <th>Stok Modeli</th>
+                <th>Stok Miktarı</th>
+                <th>Alış Fiyatı</th>
+              </tr>
+              </thead>
+              <tbody>
+
+
+              <ng-container>
+                <tr *ngFor="let item of stockAll;let i =index">
+                  <td>{{i+1}}</td>
+                  <td>{{item.serialNumber}}</td>
+                  <td>{{item.stockModelDto?.stockBrandDto?.name}}</td>
+                  <td>{{item.stockModelDto?.name}}</td>
+                  <td>{{item.stockAmount}}</td>
+                  <td>{{item.price}}</td>
+                </tr>
+              </ng-container>
+
+
+
+
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="row>">
+          <div class="col">
+            <div class="btn-group">
+              <button class="btn btn-outline-cyan"><<</button>
+              <button (click)="changePage(item)" *ngFor="let item of pageNumber"
+                      class="btn btn-outline-cyan"
+                      [class.active]="item==selectedPage"
+              >{{item}}</button>
+              <button class="btn btn-outline-cyan">>> </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
